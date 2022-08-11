@@ -69,7 +69,7 @@ jobs:
             mkdir test-results
             pipenv run pytest -k test_ --junitxml=test-results/junit.xml | circleci tests split --split-by=timings
       - store_test_results:
-          path: ./test_results.xml
+          path: test-results
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
