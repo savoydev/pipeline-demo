@@ -68,8 +68,7 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: |
-            mkdir -p test-results/junit
-            pipenv run pytest -k test_ --junitxml=test-results/junit/junit.xml | circleci tests split --split-by=timings
+            pipenv run pytest -k test_ --junitxml=test-results/junit/junit.xml --html=test-results/html/report.html | circleci tests split --split-by=timings
       - store_artifacts:
           path: test-results 
       - store_test_results:
