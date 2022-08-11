@@ -7,4 +7,4 @@ def func(x):
 
 def test_answer():
     time.sleep(5)
-    assert func(3) == 4
+    assert func(3) == 5
