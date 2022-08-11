@@ -24,6 +24,7 @@ jobs:
       - image: cimg/python:3.10.2
         environment:
           PIPENV_VENV_IN_PROJECT: true
+    resource_class: small
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
     # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
@@ -59,6 +60,7 @@ jobs:
     # Change the version below to your required version of python
     docker:
       - image: cimg/python:3.10.2
+    resource_class: small
     steps:
       - attach_workspace:
           at: ~/project
@@ -74,7 +76,7 @@ jobs:
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  build-test: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build
