@@ -30,7 +30,7 @@ jobs:
     steps:
       - checkout
       - python/install-packages:
-          args: --dev --deploy --system --ignore-pipfile
+          args: --dev --deploy --ignore-pipfile
           pkg-manager: pipenv
           venv-cache: true
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
