@@ -31,10 +31,19 @@ jobs:
     # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
+      - restore_cache:
+          name: Restore pipenv dependency cache
+          keys:
+            - pipenv-deps-{{ checksum "Pipfile.lock" }}
       - python/install-packages:
           args: --dev --deploy --ignore-pipfile
           pkg-manager: pipenv
-          cache-version: v2
+          cache-version: v3
+      - save_cache:
+          name: Save pipenv dependency cache
+          paths:
+            - /home/circleci/project/.venv
+          key: pipenv-deps-{{ checksum "Pipfile.lock" }}
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       # - run:
