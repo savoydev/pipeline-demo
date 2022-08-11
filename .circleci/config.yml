@@ -39,6 +39,7 @@ jobs:
           args: --dev --deploy --ignore-pipfile
           pkg-manager: pipenv
           cache-version: v3
+          venv-cache: false
       - save_cache:
           name: Save pipenv dependency cache
           paths:
