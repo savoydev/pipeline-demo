@@ -60,7 +60,7 @@ jobs:
     # Change the version below to your required version of python
     docker:
       - image: cimg/python:3.10.2
-    parallelism: 2
+    parallelism: 1
     resource_class: small
     steps:
       - attach_workspace:
@@ -69,7 +69,6 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: |
-            echo $(circleci tests glob "test_*.py")
             pipenv run pytest -k test_ --junitxml=test-results/junit/junit.xml --html=test-results/html/report.html | circleci tests split --split-by=timings
       - store_artifacts:
           path: test-results 
