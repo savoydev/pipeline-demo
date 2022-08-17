@@ -82,15 +82,29 @@ jobs:
             cd demo_vue && yarn run build
       - store_artifacts:
           path: demo_vue/dist
+  test-vue:
+    docker:
+      - image: cimg/node:16.14
+    resource_class: small
+    working_directory: ~/project/demo_vue
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Test vue app
+          command: |
+            cd demo_vue && yarn run test:unit
 
 workflows:
   build-test:
     jobs:
       - install-python-dependencies
       - install-vue-dependencies
+      - test-vue:
+          requires: install-vue-dependencies
       - build-vue:
           requires: 
-            - install-vue-dependencies
+            - test-vue
       - test-python:
           requires:
             - install-python-dependencies
