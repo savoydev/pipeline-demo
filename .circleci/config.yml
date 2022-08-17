@@ -5,7 +5,7 @@ orbs:
   node: circleci/node@5.0.2
 
 jobs:
-  build-python:
+  install-python-dependencies:
     docker:
       - image: cimg/python:3.10.2
         environment:
@@ -47,7 +47,7 @@ jobs:
           path: test-results 
       - store_test_results:
           path: test-results
-  build-vue:
+  install-vue-dependencies:
     docker:
       - image: cimg/node:16.14
     resource_class: small
@@ -70,8 +70,8 @@ jobs:
 workflows:
   build-test:
     jobs:
-      - build-python
-      - build-vue
+      - install-python-dependencies
+      - install-vue-dependencies
       - test-python:
           requires:
             - build-python
