@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Update to test dynamic config for vue app"/>
+    <HelloWorld msg="This is a new branch"/>
   </div>
 </template>
 

@@ -88,8 +88,8 @@ jobs:
           name: Build yarn app
           command: |
             cd demo_vue && yarn run build
-      - store_artifacts:
-          path: demo_vue/dist
+      # - store_artifacts:
+      #     path: demo_vue/dist
   test-vue:
     docker:
       - image: cimg/node:16.14
