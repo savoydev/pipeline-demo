@@ -68,6 +68,14 @@ jobs:
           root: ~/project
           paths:
             - demo_vue
+  build-vue:
+    docker:
+      - image: cimg/node:16.14
+    resource_class: small
+    working_directory: ~/project/demo_vue
+    steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Build yarn app
           command: |
@@ -80,6 +88,8 @@ workflows:
     jobs:
       - install-python-dependencies
       - install-vue-dependencies
+      - build-vue:
+          requires: -install-vue-dependencies
       - test-python:
           requires:
             - install-python-dependencies
