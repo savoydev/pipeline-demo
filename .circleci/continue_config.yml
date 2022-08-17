@@ -26,7 +26,7 @@ jobs:
           keys:
             - pipenv-deps-{{ checksum "Pipfile.lock" }}-{{ checksum "Pipfile" }}
       - python/install-packages:
-          args: --dev --deploy --ignore-pipfile
+          args: --dev --deploy
           pkg-manager: pipenv
           cache-version: v4
           venv-cache: false
