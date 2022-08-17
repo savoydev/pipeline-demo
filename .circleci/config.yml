@@ -32,6 +32,7 @@ jobs:
           paths:
             - app
             - Pipfile.lock
+            - Pipfile
             - pytest.ini
             - .venv
   test-python:
