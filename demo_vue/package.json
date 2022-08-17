@@ -3,28 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test:unit": "vue-cli-service test:unit",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "babel-core": "^7.0.0-bridge.0",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-class-component": "7.2.6"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.19",
     "@vue/cli-plugin-babel": "~4.5.8",
     "@vue/cli-plugin-eslint": "~4.5.8",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.8",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "vue-jest": "^3.0.7",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "jest": true
     },
     "extends": [
       "plugin:vue/essential",
