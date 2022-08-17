@@ -17,6 +17,7 @@ jobs:
 workflows:
   always-run:
     jobs:
+      - test-echo
       - path-filtering/filter:
           name: check-updated-files
           mapping: |
@@ -26,4 +27,3 @@ workflows:
             Pipfile.* run-python-jobs true
           base-revision: master
           config-path: .circleci/continue_config.yml
-      - test-echo
