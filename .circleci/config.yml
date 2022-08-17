@@ -37,14 +37,13 @@ jobs:
     resource_class: small
     working_directory: ~/project/demo_vue
     steps:
-      - checkout:
-          path: ~/project
-      - restore_cache:
-          name: Restore yarn dependency cache
-          keys:
-            - yarn-deps-{{ checksum "yarn.lock" }}
+      - checkout
       - node/install-packages:
+          app-dir: ./demo_vue
+          cache-only-lockfile: true
+          include-branch-in-cache-key: false
           pkg-manager: yarn
+          with-cache: true
   test-python: # This is the name of the job, feel free to change it to better match what you're trying to do!
     docker:
       - image: cimg/python:3.10.2
