@@ -65,6 +65,7 @@ httplib2 = "*"
 pytest-html = "*"
 sqlparse = "==0.4.2"
 pillow = "==9.0.1"
+cairosvg = "==2.5.2"
 
 [requires]
 python_version = "3.10"
