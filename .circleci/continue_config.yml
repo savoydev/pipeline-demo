@@ -24,17 +24,17 @@ jobs:
       - restore_cache:
           name: Restore pipenv dependency cache
           keys:
-            - pipenv-deps-{{ checksum "Pipfile.lock" }}
+            - pipenv-deps-{{ checksum "Pipfile.lock" }}-{{ checksum "Pipfile" }}
       - python/install-packages:
           args: --dev --deploy --ignore-pipfile
           pkg-manager: pipenv
-          cache-version: v3
+          cache-version: v4
           venv-cache: false
       - save_cache:
           name: Save pipenv dependency cache
           paths:
             - /home/circleci/project/.venv
-          key: pipenv-deps-{{ checksum "Pipfile.lock" }}
+          key: pipenv-deps-{{ checksum "Pipfile.lock" }}-{{ checksum "Pipfile" }}
       - persist_to_workspace:
           root: ~/project
           paths:
