@@ -14,5 +14,5 @@ test('displays message', () => {
   })
 
   // Assert the rendered text of the component
-  expect(wrapper.text()).toBe('')
+  expect(wrapper.text()).toBe('Hello world')
 })
