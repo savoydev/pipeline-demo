@@ -33,6 +33,7 @@ jobs:
             - app
             - Pipfile.lock
             - pytest.ini
+            - .venv
   test-python:
     docker:
       - image: cimg/python:3.10.2
