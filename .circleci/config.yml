@@ -5,6 +5,15 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.1.1
 
+jobs:
+  test-echo:
+    docker:
+      - image: cimg/node:16.14
+    resource_class: small
+    steps:
+      - run:
+          command: echo testing 1, 2, 3
+
 workflows:
   always-run:
     jobs:
@@ -17,3 +26,4 @@ workflows:
             Pipfile.* run-python-jobs true
           base-revision: master
           config-path: .circleci/continue_config.yml
+      - test-echo
