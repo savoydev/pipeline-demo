@@ -2,4 +2,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Testing labels")
+    return HttpResponse("Testing executor change")

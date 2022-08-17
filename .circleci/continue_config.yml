@@ -4,6 +4,16 @@ orbs:
   python: circleci/python@1.5.0
   node: circleci/node@5.0.2
 
+executors:
+  python-executor:
+    docker:
+      - image: cimg/python:3.10.2
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+  vue-executor:
+    docker:
+      - image: cimg/node:16.14
+
 parameters:
   run-vue-jobs:
     type: boolean
@@ -11,13 +21,14 @@ parameters:
   run-python-jobs:
     type: boolean
     default: false
+  deploy-environment:
+    type: enum
+    enum: [dev, stage, prod]
+    default: dev
 
 jobs:
   install-python-dependencies:
-    docker:
-      - image: cimg/python:3.10.2
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
+    executor: python-executor
     resource_class: small
     steps:
       - checkout
@@ -44,8 +55,7 @@ jobs:
             - pytest.ini
             - .venv
   test-python:
-    docker:
-      - image: cimg/python:3.10.2
+    executor: python-executor
     parallelism: 1
     resource_class: small
     steps:
@@ -60,8 +70,7 @@ jobs:
       - store_test_results:
           path: test-results
   install-vue-dependencies:
-    docker:
-      - image: cimg/node:16.14
+    executor: vue-executor
     resource_class: small
     working_directory: ~/project/demo_vue
     steps:
@@ -77,8 +86,7 @@ jobs:
           paths:
             - demo_vue
   build-vue:
-    docker:
-      - image: cimg/node:16.14
+    executor: vue-executor
     resource_class: small
     working_directory: ~/project/demo_vue
     steps:
@@ -91,8 +99,7 @@ jobs:
       # - store_artifacts:
       #     path: demo_vue/dist
   test-vue:
-    docker:
-      - image: cimg/node:16.14
+    executor: vue-executor
     resource_class: small
     working_directory: ~/project/demo_vue
     steps:
