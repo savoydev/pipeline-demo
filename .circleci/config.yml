@@ -64,6 +64,10 @@ jobs:
           include-branch-in-cache-key: false
           pkg-manager: yarn
           with-cache: true
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - demo_vue
       - run:
           name: Build yarn app
           command: |
