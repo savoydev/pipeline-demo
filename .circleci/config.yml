@@ -4,7 +4,7 @@ orbs:
   python: circleci/python@1.5.0
 
 jobs:
-  build: # This is the name of the job, feel free to change it to better match what you're trying to do!
+  build-python: # This is the name of the job, feel free to change it to better match what you're trying to do!
     docker:
       - image: cimg/python:3.10.2
         environment:
@@ -30,7 +30,7 @@ jobs:
           root: ~/project
           paths:
             - .
-  test: # This is the name of the job, feel free to change it to better match what you're trying to do!
+  test-python: # This is the name of the job, feel free to change it to better match what you're trying to do!
     docker:
       - image: cimg/python:3.10.2
     parallelism: 1
@@ -50,7 +50,7 @@ jobs:
 workflows:
   build-test: # This is the name of the workflow, feel free to change it to better match your workflow.
     jobs:
-      - build
-      - test:
+      - build-python
+      - test-python:
           requires:
             - build
