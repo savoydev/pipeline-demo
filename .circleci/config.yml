@@ -31,6 +31,7 @@ jobs:
           root: ~/project
           paths:
             - app
+            - Pipfile.lock
             - pytest.ini
   test-python:
     docker:
