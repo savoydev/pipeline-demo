@@ -74,4 +74,4 @@ workflows:
       - install-vue-dependencies
       - test-python:
           requires:
-            - build-python
+            - install-python-dependencies
