@@ -62,7 +62,7 @@ jobs:
           with-cache: true
       - run:
           name: Build yarn app
-          command: yarn build
+          command: yarn run build
 
 workflows:
   build-test:
