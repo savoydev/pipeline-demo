@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@1.5.0
+  node: circleci/node@15.0.1
 
 jobs:
   build-python: # This is the name of the job, feel free to change it to better match what you're trying to do!
