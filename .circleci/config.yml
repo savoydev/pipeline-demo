@@ -30,7 +30,8 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - .
+            - app
+            - pytest.ini
   test-python:
     docker:
       - image: cimg/python:3.10.2
