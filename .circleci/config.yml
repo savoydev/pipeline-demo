@@ -1,111 +1,17 @@
 version: 2.1
 
-orbs:
-  python: circleci/python@1.5.0
-  node: circleci/node@5.0.2
+setup: true
 
-jobs:
-  install-python-dependencies:
-    docker:
-      - image: cimg/python:3.10.2
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-    resource_class: small
-    steps:
-      - checkout
-      - restore_cache:
-          name: Restore pipenv dependency cache
-          keys:
-            - pipenv-deps-{{ checksum "Pipfile.lock" }}
-      - python/install-packages:
-          args: --dev --deploy --ignore-pipfile
-          pkg-manager: pipenv
-          cache-version: v3
-          venv-cache: false
-      - save_cache:
-          name: Save pipenv dependency cache
-          paths:
-            - /home/circleci/project/.venv
-          key: pipenv-deps-{{ checksum "Pipfile.lock" }}
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - app
-            - Pipfile.lock
-            - Pipfile
-            - pytest.ini
-            - .venv
-  test-python:
-    docker:
-      - image: cimg/python:3.10.2
-    parallelism: 1
-    resource_class: small
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: Run tests
-          command: |
-            pipenv run pytest -k test_ --junitxml=test-results/junit/junit.xml --html=test-results/html/report.html | circleci tests split --split-by=timings
-      - store_artifacts:
-          path: test-results 
-      - store_test_results:
-          path: test-results
-  install-vue-dependencies:
-    docker:
-      - image: cimg/node:16.14
-    resource_class: small
-    working_directory: ~/project/demo_vue
-    steps:
-      - checkout
-      - node/install-packages:
-          app-dir: ./demo_vue
-          cache-only-lockfile: true
-          include-branch-in-cache-key: false
-          pkg-manager: yarn
-          with-cache: true
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - demo_vue
-  build-vue:
-    docker:
-      - image: cimg/node:16.14
-    resource_class: small
-    working_directory: ~/project/demo_vue
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: Build yarn app
-          command: |
-            cd demo_vue && yarn run build
-      - store_artifacts:
-          path: demo_vue/dist
-  test-vue:
-    docker:
-      - image: cimg/node:16.14
-    resource_class: small
-    working_directory: ~/project/demo_vue
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: Test vue app
-          command: |
-            cd demo_vue && yarn run test:unit
+orbs:
+  path-filtering: circleci/path-filtering@0.1.1
 
 workflows:
-  build-test:
+  always-run:
     jobs:
-      - install-python-dependencies
-      - install-vue-dependencies
-      - test-vue:
-          requires:
-            - install-vue-dependencies
-      - build-vue:
-          requires: 
-            - test-vue
-      - test-python:
-          requires:
-            - install-python-dependencies
+      - path-filtering/filter
+          name: check-updated-files
+          mapping: |
+            demo_vue/.* run-vue-jobs true
+            app/.* run-python-jobs true
+          base-revision: main
+          config-path: .circleci/continue_config.yml
