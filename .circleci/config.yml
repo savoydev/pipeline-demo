@@ -33,7 +33,7 @@ jobs:
             - .
   build-vue:
     docker:
-      - image: cimg/node:16
+      - image: cimg/node:16.14
     resource_class: small
     working_directory: ~/project/demo_vue
     steps:
