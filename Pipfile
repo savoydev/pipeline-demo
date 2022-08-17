@@ -63,6 +63,7 @@ boto3 = "*"
 botocore = "*"
 httplib2 = "*"
 pytest-html = "*"
+sqlparse = "==0.4.2"
 
 [requires]
 python_version = "3.10"
