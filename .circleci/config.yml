@@ -13,5 +13,6 @@ workflows:
           mapping: |
             demo_vue/.* run-vue-jobs true
             app/.* run-python-jobs true
+            Pipfile.* run-python-jobs true
           base-revision: master
           config-path: .circleci/continue_config.yml
