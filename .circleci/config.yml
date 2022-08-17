@@ -12,7 +12,7 @@ jobs:
     resource_class: small
     steps:
       - run:
-          command: echo testing 1, 2, 3
+          command: echo << pipeline.project.git_url >>
 
 workflows:
   always-run:
