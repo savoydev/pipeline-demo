@@ -8,7 +8,7 @@ orbs:
 workflows:
   always-run:
     jobs:
-      - path-filtering/filter
+      - path-filtering/filter:
           name: check-updated-files
           mapping: |
             demo_vue/.* run-vue-jobs true
