@@ -43,7 +43,7 @@ jobs:
           keys:
             - yarn-deps-{{ checksum "yarn.lock" }}
       - node/run:
-          yarn-run: build
+          yarn: build
   test-python: # This is the name of the job, feel free to change it to better match what you're trying to do!
     docker:
       - image: cimg/python:3.10.2
