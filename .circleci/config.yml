@@ -54,7 +54,6 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dir: ./demo_vue
           cache-only-lockfile: true
           include-branch-in-cache-key: false
           pkg-manager: yarn
