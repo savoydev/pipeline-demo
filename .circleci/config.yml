@@ -63,6 +63,8 @@ jobs:
           name: Build yarn app
           command: |
             cd demo_vue && yarn run build
+      - store_artifacts:
+          path: demo_vue/dist
 
 workflows:
   build-test:
