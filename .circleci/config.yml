@@ -62,7 +62,8 @@ jobs:
           with-cache: true
       - run:
           name: Build yarn app
-          command: yarn run build
+          command: |
+            cd demo_vue && yarn run build
 
 workflows:
   build-test:
