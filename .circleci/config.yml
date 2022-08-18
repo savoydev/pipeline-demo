@@ -15,6 +15,7 @@ jobs:
           command: echo << pipeline.project.git_url >>
 
 workflows:
+  version: 2
   always-run:
     jobs:
       - test-echo
