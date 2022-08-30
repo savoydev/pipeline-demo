@@ -5,26 +5,15 @@ setup: true
 orbs:
   path-filtering: circleci/path-filtering@0.1.1
 
-jobs:
-  test-echo:
-    docker:
-      - image: cimg/node:16.14
-    resource_class: small
-    steps:
-      - run:
-          command: echo << pipeline.project.git_url >>
-
 workflows:
-  version: 2
   always-run:
     jobs:
-      - test-echo
-      # - path-filtering/filter:
-      #     name: check-updated-files
-      #     mapping: |
-      #       demo_vue/.* run-vue-jobs true
-      #       app/.* run-python-jobs true
-      #       Pipfile run-python-jobs true
-      #       Pipfile.* run-python-jobs true
-      #     base-revision: master
-      #     config-path: .circleci/continue_config.yml
+      - path-filtering/filter:
+          name: check-updated-files
+          mapping: |
+            demo_vue/.* run-vue-jobs true
+            app/.* run-python-jobs true
+            Pipfile run-python-jobs true
+            Pipfile.* run-python-jobs true
+          base-revision: master
+          config-path: .circleci/continue_config.yml
