@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="This is a new branch"/>
+    <HelloWorld msg="Testing executor update"/>
   </div>
 </template>
 
